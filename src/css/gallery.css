@@ -1,5 +1,5 @@
 main {
-  max-width: 1128px;
+  width: 100;
   margin-top: 36px;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,6 @@ main {
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: calc(33.33% - 20px);
 }
 
 .image-card img {
@@ -61,6 +60,7 @@ main {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-bottom: 15px;
 }
 .search-input:hover {
   outline: 1px solid #000;
@@ -77,13 +77,14 @@ main {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   margin-left: 10px;
+  margin-bottom: 15px;
 }
 
 .search-button:hover {
   background-color: #4e75ff;
 }
+
 .loader {
   width: 48px;
   height: 48px;
@@ -95,6 +96,7 @@ main {
   box-sizing: border-box;
   animation: rotation 2s linear infinite;
 }
+
 .loader::after {
   content: '';
   box-sizing: border-box;

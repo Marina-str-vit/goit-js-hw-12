@@ -24,6 +24,13 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   margin: 0;
+  background: linear-gradient(
+    315deg,
+    rgba(101, 0, 94, 1) 33%,
+    rgba(60, 132, 206, 1) 45%,
+    rgba(48, 238, 226, 1) 79%,
+    rgba(255, 25, 25, 1) 89%
+  );
 }
 
 h1,
