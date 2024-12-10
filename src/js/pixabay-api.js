@@ -27,9 +27,5 @@ export async function fetchImages(searchQuery, page = 1) {
     // console.error(error.message);
 
     document.querySelector('input').value = '';
-    const loaderSpan = document.querySelector('.loader');
-    if (loaderSpan) {
-      loaderSpan.remove();
-    }
   }
 }
