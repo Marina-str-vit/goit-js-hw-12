@@ -85,7 +85,7 @@ searchForm.addEventListener('submit', async event => {
     loader.style.display = 'none';
   }
   if (loaderSpinner) {
-    return loaderSpinner.remove();
+    loaderSpinner.remove();
   } else {
     if (images.totalHits <= currentPage * imagesPerPage) {
       loadMoreButton.style.display = 'none';
