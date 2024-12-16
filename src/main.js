@@ -88,16 +88,18 @@ searchForm.addEventListener('submit', async event => {
     loaderSpinner.remove();
   } else {
     if (images.totalHits <= currentPage * imagesPerPage) {
+      iziToast.error({
+        message:
+          'We are sorry, but you have reached the end of search results.',
+        position: 'topRight',
+        iconUrl: iconReject,
+        backgroundColor: '#EF4040',
+        messageColor: 'white',
+        timeout: 5000,
+      });
       loadMoreButton.style.display = 'none';
       loader.style.display = 'none';
       document.querySelector('#search-input').value = '';
-      const messageContainer = document.createElement('div');
-      messageContainer.classList.add('end-of-results-message');
-      const message = document.createElement('p');
-      message.textContent =
-        "We're sorry, but you've reached the end of search results.";
-      messageContainer.appendChild(message);
-      gallery.appendChild(messageContainer);
       lightbox.refresh();
       return;
     }
@@ -127,19 +129,4 @@ loadMoreButton.addEventListener('click', async () => {
   lightbox.refresh();
   loader.style.display = 'none';
   loadMoreButton.disabled = images.hits.length < imagesPerPage;
-
-  if (images.hits.length === 0) {
-    loadMoreButton.style.display = 'none';
-  }
-  if (images.totalHits <= currentPage * imagesPerPage) {
-    loadMoreButton.style.display = 'none';
-    loader.style.display = 'none';
-    const messageContainer = document.createElement('div');
-    messageContainer.classList = 'end-of-results-message';
-    const message = document.createElement('p');
-    message.textContent =
-      "We're sorry, but you've reached the end of search results.";
-    messageContainer.appendChild(message);
-    gallery.appendChild(messageContainer);
-  }
 });
