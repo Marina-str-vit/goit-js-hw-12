@@ -90,6 +90,8 @@ export function renderLoadMoreButton() {
   loadMoreButton.classList.add('search-button');
   loadMoreButton.textContent = 'Load more';
   loadMoreButton.disabled = true;
+  loadMoreButton.style.display = 'none';
+
   return loadMoreButton;
 }
 

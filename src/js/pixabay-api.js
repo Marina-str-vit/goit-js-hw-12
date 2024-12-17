@@ -3,10 +3,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
 
-// const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '47392107-146a4706033000661fe0e92fb';
-// export const searchQuery = "";
-// document.querySelector('.search-input').value.trim();
 
 export async function fetchImages(searchQuery, page = 1) {
   try {
@@ -24,8 +21,6 @@ export async function fetchImages(searchQuery, page = 1) {
       messageColor: 'white',
       timeout: 3000,
     });
-    // console.error(error.message);
-
     document.querySelector('input').value = '';
   }
 }
