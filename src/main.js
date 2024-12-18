@@ -41,10 +41,11 @@ const imagesPerPage = 15;
 searchForm.addEventListener('submit', async event => {
   event.preventDefault();
   loader.style.display = 'block';
+  // кнопка не відображається
+  loadMoreButton.style.display = 'none';
   const searchQuery = document.querySelector('#search-input').value.trim();
   if (searchQuery === '') {
     loader.style.display = 'none';
-    loadMoreButton.style.display = 'none';
     iziToast.error({
       title: 'Error',
       titleColor: 'white',
@@ -57,22 +58,19 @@ searchForm.addEventListener('submit', async event => {
     });
     return;
   }
-
-  currentPage = 1;
-  gallery.innerHTML = '';
-  loadMoreButton.style.display = 'block';
-  loadMoreButton.disabled = true;
-  searchQueryGlobal = searchQuery;
-  try {
-    const images = await fetchImages(searchQuery, currentPage);
-    const imageGallery = renderImageGallery(images.hits);
-    imageGallery.forEach(imageCard => {
-      gallery.appendChild(imageCard);
-      lightbox.refresh();
-    });
+    gallery.innerHTML = '';
+    searchQueryGlobal = searchQuery;
+    try {
+      const images = await fetchImages(searchQuery, currentPage);
+      loadMoreButton.style.display = 'block';
+      const imageGallery = renderImageGallery(images.hits);
+      imageGallery.forEach(imageCard => {
+        gallery.appendChild(imageCard);
+        lightbox.refresh();
+      });
 
     const loaderSpinner = document.querySelector('.loader');
-
+  
     if (images.hits.length === 0) {
       iziToast.error({
         title: 'No results',
@@ -85,7 +83,6 @@ searchForm.addEventListener('submit', async event => {
         messageColor: 'white',
         timeout: 3000,
       });
-      loadMoreButton.style.display = 'none';
       loader.style.display = 'none';
       document.querySelector('#search-input').value = '';
     }
@@ -96,6 +93,7 @@ searchForm.addEventListener('submit', async event => {
       document.querySelector('#search-input').value = '';
       lightbox.refresh();
     }
+    // остання сторінка
     if ( images.totalHits <= currentPage * imagesPerPage && images.totalHits > 0) {
       iziToast.error({
         message:
@@ -110,13 +108,13 @@ searchForm.addEventListener('submit', async event => {
       document.querySelector('#search-input').value = '';
       return;
     }
-    loadMoreButton.disabled = images.hits.length < imagesPerPage;
     if (images.hits.length > 0) {
       loadMoreButton.style.display = 'block';
       loader.style.display = 'none';
     }
   } catch (error) {
     iziToast.error({ message: error.message, });
+    loadMoreButton.style.display = 'none';
   } finally {
     document.querySelector('#search-input').value = '';
   }
@@ -142,10 +140,14 @@ async function onLoadMore () {
     });
     lightbox.refresh();
     loader.style.display = 'none';
-    loadMoreButton.disabled = images.hits.length < imagesPerPage;    
+    // остання сторінка
+    if (images.hits.length < imagesPerPage) {
+      loadMoreButton.style.display = 'none';
+    }
   } catch (error) {
     iziToast.error({
       message: error.message, 
       });
+    loadMoreButton.style.display = 'none';
   } 
-  };
+  }

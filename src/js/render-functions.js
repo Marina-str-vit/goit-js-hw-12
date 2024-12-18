@@ -89,7 +89,6 @@ export function renderLoadMoreButton() {
   const loadMoreButton = document.createElement('button');
   loadMoreButton.classList.add('search-button');
   loadMoreButton.textContent = 'Load more';
-  loadMoreButton.disabled = true;
   loadMoreButton.style.display = 'none';
 
   return loadMoreButton;
