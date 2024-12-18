@@ -58,6 +58,7 @@ searchForm.addEventListener('submit', async event => {
     });
     return;
   }
+    currentPage = 1;
     gallery.innerHTML = '';
     searchQueryGlobal = searchQuery;
     try {
@@ -144,6 +145,15 @@ async function onLoadMore () {
     loader.style.display = 'none';
     // остання сторінка
     if (images.hits.length < imagesPerPage) {
+      iziToast.error({
+        message:
+          'We are sorry, but you have reached the end of search results.',
+        position: 'topRight',
+        iconUrl: iconReject,
+        backgroundColor: '#EF4040',
+        messageColor: 'white',
+        timeout: 3000,
+      });
       loadMoreButton.style.display = 'none';
     }
   } catch (error) {
