@@ -23,4 +23,4 @@ export async function fetchImages(searchQuery, page = 1) {
     });
     document.querySelector('input').value = '';
   }
-}
+};

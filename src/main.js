@@ -70,7 +70,9 @@ searchForm.addEventListener('submit', async event => {
       });
 
     const loaderSpinner = document.querySelector('.loader');
-  
+    if (images.hits.length < imagesPerPage) {
+      loadMoreButton.style.display = 'none';
+    }
     if (images.hits.length === 0) {
       iziToast.error({
         title: 'No results',
